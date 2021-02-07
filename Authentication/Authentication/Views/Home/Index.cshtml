@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <h1>User is authenticated</h1>
+}
+else { 
+    <h1>User is not authenticate</h1>
+}
+
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService _authorizationService
+<h1>Index</h1>
+@if ((await _authorizationService.AuthorizeAsync(User, "Claim.DoB")).Succeeded)
+{
+    <h1>User has  dbo claim </h1>
+}
+
